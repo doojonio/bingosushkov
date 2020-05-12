@@ -27,10 +27,13 @@ while (my $string = <$fh>) {
 close $fh;
 
 while (my ($ticket, $tnum) = each %tickets) {
-    say $ticket;
     my @remaining;
     for my $num (@$tnum) {
         push @remaining, $num if !scalar(grep { $_ == $num } @numbers);
     }
-    say join ',', @remaining, "\n";
+    my $n_rem = @remaining;
+    my $n_all = @$tnum;
+    say '---' x 10;
+    say "$ticket: $n_rem of $n_all";
+    say join ',', @remaining;
 }
